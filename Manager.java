@@ -10,6 +10,16 @@ public class Manager {
         this.fibonacci = new Fibonacci();
         this.splitter = new Splitter();
 }
+	public void saveToFile(String filename, List<Integer> data) {
+        try (FileWriter writer = new FileWriter(filename)) {
+            for (int number : data) {
+                writer.write(number + "\n");
+            }
+        } catch (IOException e) {
+            System.err.println("Error while writing to file: " + filename);
+            e.printStackTrace();
+        }
+    }
     public void execute() {
         List<Integer> sequence = fibonacci.generateFibonacci(1_000_000);
         List<Integer> evenNumbers = splitter.filterEven(sequence);
